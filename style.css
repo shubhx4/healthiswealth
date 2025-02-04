@@ -1,36 +1,78 @@
+/* General Styles */
 body {
     font-family: Arial, sans-serif;
     text-align: center;
-    background-color: #f4f4f4;
+    background: linear-gradient(to right, #2193b0, #6dd5ed);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 0;
 }
 
 .container {
-    width: 50%;
-    margin: auto;
-    background: white;
+    width: 90%;
+    max-width: 500px;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
     padding: 20px;
-    margin-top: 50px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    margin-top: 20px;
 }
 
-input {
+input, button {
     width: 80%;
     padding: 10px;
     margin: 10px;
-    border: 1px solid #ccc;
+    border: none;
     border-radius: 5px;
 }
 
+input {
+    background: rgba(255, 255, 255, 0.3);
+    border: 1px solid white;
+    color: black;
+}
+
 button {
-    padding: 10px;
-    margin: 10px;
-    border: none;
     background-color: #28a745;
     color: white;
     cursor: pointer;
-    border-radius: 5px;
 }
 
 button:hover {
     background-color: #218838;
+}
+
+.hidden {
+    display: none;
+}
+
+.show {
+    display: block;
+}
+
+/* Responsive Diet Table */
+.responsive-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+}
+
+.responsive-table th, .responsive-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+@media screen and (max-width: 600px) {
+    .container {
+        width: 100%;
+        padding: 10px;
+    }
+    input, button {
+        width: 100%;
+    }
 }
