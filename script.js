@@ -3,13 +3,11 @@ const firebaseConfig = {
     apiKey: "AIzaSyDK0PeFgt6_YNqggkIM9MTMSVDYb-a4eHc",
     authDomain: "health-is-wealth-6864b.firebaseapp.com",
     projectId: "health-is-wealth-6864b",
-    storageBucket: "health-is-wealth-6864b.firebasestorage.app",
+    storageBucket: "health-is-wealth-6864b.appspot.com",
     messagingSenderId: "701100085079",
     appId: "1:701100085079:web:7d8cfbdce0f91553577812",
     measurementId: "G-6Y75SX5E8Q"
 };
-
-// Firebase Configuration (Replace with your Firebase project details)
 
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
@@ -20,9 +18,18 @@ const db = firebase.firestore();
 function register() {
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
-    
     auth.createUserWithEmailAndPassword(email, password)
-        .then(() => alert("Registered Successfully"))
+        .then((userCredential) => {
+            const user = userCredential.user;
+            db.collection("users").doc(user.uid).set({
+                email: user.email,
+                name: "",
+                age: "",
+                weight: "",
+                history: []
+            });
+            alert("Registered Successfully!");
+        })
         .catch(error => alert(error.message));
 }
 
@@ -30,42 +37,45 @@ function register() {
 function login() {
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
-    
     auth.signInWithEmailAndPassword(email, password)
-        .then(() => {
-            alert("Login Successful");
-            document.getElementById("auth").style.display = "none";
-            document.getElementById("userForm").style.display = "block";
+        .then((userCredential) => {
+            alert("Login Successful!");
+            loadUserProfile(userCredential.user.uid);
         })
         .catch(error => alert(error.message));
+}
+
+// Load User Profile
+function loadUserProfile(uid) {
+    db.collection("users").doc(uid).get().then((doc) => {
+        if (doc.exists) {
+            document.getElementById("auth").style.display = "none";
+            document.getElementById("userProfile").style.display = "block";
+            document.getElementById("name").value = doc.data().name;
+            document.getElementById("profileEmail").value = doc.data().email;
+            document.getElementById("profileAge").value = doc.data().age;
+            document.getElementById("profileWeight").value = doc.data().weight;
+        }
+    });
+}
+
+// Update Profile
+function updateProfile() {
+    const user = auth.currentUser;
+    if (user) {
+        db.collection("users").doc(user.uid).update({
+            name: document.getElementById("name").value,
+            age: document.getElementById("profileAge").value,
+            weight: document.getElementById("profileWeight").value
+        }).then(() => alert("Profile Updated!"));
+    }
 }
 
 // Logout User
 function logout() {
     auth.signOut().then(() => {
-        alert("Logged Out");
+        alert("Logged Out!");
         document.getElementById("auth").style.display = "block";
-        document.getElementById("userForm").style.display = "none";
-        document.getElementById("result").style.display = "none";
+        document.getElementById("userProfile").style.display = "none";
     });
 }
-
-// Submit User Details
-function submitDetails() {
-    const age = document.getElementById("age").value;
-    const weight = document.getElementById("weight").value;
-
-    let healthPlan = "";
-
-    if (age < 18) {
-        healthPlan = "Eat more proteins, do physical activities like running.";
-    } else if (age >= 18 && age <= 40) {
-        healthPlan = "Maintain a balanced diet with proteins and carbs, exercise daily.";
-    } else {
-        healthPlan = "Eat light food, walk daily, and maintain low salt intake.";
-    }
-
-    document.getElementById("report").innerText = healthPlan;
-    document.getElementById("result").style.display = "block";
-}
-
