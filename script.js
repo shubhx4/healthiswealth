@@ -79,3 +79,32 @@ function logout() {
         document.getElementById("userProfile").style.display = "none";
     });
 }
+
+// Generate Diet Plan and Save to History
+function submitDetails() {
+    const age = document.getElementById("age").value;
+    const weight = document.getElementById("weight").value;
+    const dietTable = document.getElementById("dietTable");
+    const resultSection = document.getElementById("result");
+    
+    if (!dietTable || !resultSection) {
+        console.error("Diet table or result section not found.");
+        return;
+    }
+
+    let healthPlan = [
+        ["Breakfast", "Oats with fruits"],
+        ["Lunch", "Grilled chicken with salad"],
+        ["Snack", "Nuts and yogurt"],
+        ["Dinner", "Steamed vegetables with fish"]
+    ];
+
+    dietTable.innerHTML = "<tr><th>Meal</th><th>Plan</th></tr>";
+    healthPlan.forEach(item => {
+        let row = dietTable.insertRow();
+        row.insertCell(0).innerText = item[0];
+        row.insertCell(1).innerText = item[1];
+    });
+
+    resultSection.classList.remove("hidden");
+}
