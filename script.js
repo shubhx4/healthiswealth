@@ -9,6 +9,7 @@ const firebaseConfig = {
     measurementId: "G-6Y75SX5E8Q"
 };
 
+// Firebase Configuration (Replace with your Firebase project details)
 
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
@@ -19,6 +20,7 @@ const db = firebase.firestore();
 function register() {
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
+    
     auth.createUserWithEmailAndPassword(email, password)
         .then(() => alert("Registered Successfully"))
         .catch(error => alert(error.message));
@@ -28,6 +30,7 @@ function register() {
 function login() {
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
+    
     auth.signInWithEmailAndPassword(email, password)
         .then(() => {
             alert("Login Successful");
@@ -65,3 +68,4 @@ function submitDetails() {
     document.getElementById("report").innerText = healthPlan;
     document.getElementById("result").style.display = "block";
 }
+
