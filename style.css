@@ -1,4 +1,4 @@
-/* General Styles */
+/* Glassmorphism Effect */
 body {
     font-family: Arial, sans-serif;
     text-align: center;
@@ -7,19 +7,28 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
-    margin: 0;
 }
 
 .container {
-    width: 90%;
-    max-width: 500px;
+    width: 80%;
+    max-width: 400px;
     background: rgba(255, 255, 255, 0.2);
     backdrop-filter: blur(10px);
     border-radius: 10px;
     padding: 20px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-    margin-top: 20px;
+}
+
+/* Smooth Animations */
+.hidden {
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: all 0.5s ease-in-out;
+}
+
+.show {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 input, button {
@@ -33,7 +42,7 @@ input, button {
 input {
     background: rgba(255, 255, 255, 0.3);
     border: 1px solid white;
-    color: black;
+    color: white;
 }
 
 button {
@@ -46,33 +55,7 @@ button:hover {
     background-color: #218838;
 }
 
-.hidden {
-    display: none;
-}
-
-.show {
-    display: block;
-}
-
-/* Responsive Diet Table */
-.responsive-table {
-    width: 100%;
-    border-collapse: collapse;
-    background: white;
-}
-
-.responsive-table th, .responsive-table td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: left;
-}
-
-@media screen and (max-width: 600px) {
-    .container {
-        width: 100%;
-        padding: 10px;
-    }
-    input, button {
-        width: 100%;
-    }
+/* Text Colors */
+h1, h2, p {
+    color: white;
 }
