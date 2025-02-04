@@ -30,7 +30,10 @@ function register() {
             });
             alert("Registered Successfully!");
         })
-        .catch(error => alert(error.message));
+        .catch(error => {
+            console.error("Registration Error:", error);
+            alert(error.message);
+        });
 }
 
 // Login User
@@ -39,24 +42,33 @@ function login() {
     const password = document.getElementById("password").value;
     auth.signInWithEmailAndPassword(email, password)
         .then((userCredential) => {
+            console.log("Login Successful for UID:", userCredential.user.uid);
             alert("Login Successful!");
             loadUserProfile(userCredential.user.uid);
         })
-        .catch(error => alert(error.message));
+        .catch(error => {
+            console.error("Login Error:", error);
+            alert(error.message);
+        });
 }
 
 // Load User Profile
 function loadUserProfile(uid) {
-    db.collection("users").doc(uid).get().then((doc) => {
-        if (doc.exists) {
-            document.getElementById("auth").style.display = "none";
-            document.getElementById("userProfile").style.display = "block";
-            document.getElementById("name").value = doc.data().name;
-            document.getElementById("profileEmail").value = doc.data().email;
-            document.getElementById("profileAge").value = doc.data().age;
-            document.getElementById("profileWeight").value = doc.data().weight;
-        }
-    });
+    db.collection("users").doc(uid).get()
+        .then((doc) => {
+            if (doc.exists) {
+                console.log("User Profile Loaded:", doc.data());
+                document.getElementById("auth").style.display = "none";
+                document.getElementById("userProfile").style.display = "block";
+                document.getElementById("name").value = doc.data().name || "";
+                document.getElementById("profileEmail").value = doc.data().email;
+                document.getElementById("profileAge").value = doc.data().age || "";
+                document.getElementById("profileWeight").value = doc.data().weight || "";
+            } else {
+                console.error("No user profile found!");
+            }
+        })
+        .catch(error => console.error("Profile Load Error:", error));
 }
 
 // Update Profile
@@ -67,7 +79,8 @@ function updateProfile() {
             name: document.getElementById("name").value,
             age: document.getElementById("profileAge").value,
             weight: document.getElementById("profileWeight").value
-        }).then(() => alert("Profile Updated!"));
+        }).then(() => alert("Profile Updated!"))
+        .catch(error => console.error("Update Profile Error:", error));
     }
 }
 
@@ -77,34 +90,5 @@ function logout() {
         alert("Logged Out!");
         document.getElementById("auth").style.display = "block";
         document.getElementById("userProfile").style.display = "none";
-    });
-}
-
-// Generate Diet Plan and Save to History
-function submitDetails() {
-    const age = document.getElementById("age").value;
-    const weight = document.getElementById("weight").value;
-    const dietTable = document.getElementById("dietTable");
-    const resultSection = document.getElementById("result");
-    
-    if (!dietTable || !resultSection) {
-        console.error("Diet table or result section not found.");
-        return;
-    }
-
-    let healthPlan = [
-        ["Breakfast", "Oats with fruits"],
-        ["Lunch", "Grilled chicken with salad"],
-        ["Snack", "Nuts and yogurt"],
-        ["Dinner", "Steamed vegetables with fish"]
-    ];
-
-    dietTable.innerHTML = "<tr><th>Meal</th><th>Plan</th></tr>";
-    healthPlan.forEach(item => {
-        let row = dietTable.insertRow();
-        row.insertCell(0).innerText = item[0];
-        row.insertCell(1).innerText = item[1];
-    });
-
-    resultSection.classList.remove("hidden");
+    }).catch(error => console.error("Logout Error:", error));
 }
