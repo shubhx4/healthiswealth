@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Health is Wealth</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <div class="container">
@@ -16,26 +18,43 @@
             <input type="password" id="password" placeholder="Enter Password">
             <button onclick="register()">Register</button>
             <button onclick="login()">Login</button>
+        </div>
+
+        <div id="userProfile" class="hidden">
+            <h2>User Profile</h2>
+            <input type="text" id="name" placeholder="Enter Name">
+            <input type="email" id="profileEmail" disabled>
+            <input type="number" id="profileAge" placeholder="Enter Age">
+            <input type="number" id="profileWeight" placeholder="Enter Weight (kg)">
+            <button onclick="updateProfile()">Update Profile</button>
             <button onclick="logout()">Logout</button>
         </div>
 
-        <div id="userForm" style="display: none;">
+        <div id="userForm" class="hidden">
             <h2>Enter Your Details</h2>
             <input type="number" id="age" placeholder="Enter Age">
             <input type="number" id="weight" placeholder="Enter Weight (kg)">
             <button onclick="submitDetails()">Get Health Plan</button>
         </div>
 
-        <div id="result" style="display: none;">
+        <div id="result" class="hidden">
             <h2>Your Health Report</h2>
-            <p id="report"></p>
+            <table id="dietTable"></table>
         </div>
+
+        <div id="history" class="hidden">
+            <h2>Diet Plan History</h2>
+            <ul id="historyList"></ul>
+        </div>
+
+        <canvas id="weightChart" class="hidden"></canvas>
     </div>
 
     <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <script src="script.js"></script>
 </body>
 </html>
