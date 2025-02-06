@@ -1,18 +1,3 @@
-const firebaseConfig = {
-    apiKey: "AIzaSyDK0PeFgt6_YNqggkIM9MTMSVDYb-a4eHc",
-    authDomain: "health-is-wealth-6864b.firebaseapp.com",
-    projectId: "health-is-wealth-6864b",
-    storageBucket: "health-is-wealth-6864b.appspot.com", // FIXED TYPO
-    storageBucket: "health-is-wealth-6864b.appspot.com",
-    messagingSenderId: "701100085079",
-    appId: "1:701100085079:web:7d8cfbdce0f91553577812",
-    measurementId: "G-6Y75SX5E8Q"
-};
-
-firebase.initializeApp(firebaseConfig);
-const auth = firebase.auth();
-const db = firebase.firestore();
-
 // DOM Elements
 const loginPage = document.getElementById("login-page");
 const registerPage = document.getElementById("register-page");
@@ -52,7 +37,7 @@ document.getElementById("go-to-login").addEventListener("click", () => {
 loginBtn.addEventListener("click", () => {
   const email = loginEmail.value;
   const password = loginPassword.value;
-  auth.signInWithEmailAndPassword(email, password)
+  signInWithEmailAndPassword(auth, email, password)
     .then(() => {
       loginPage.classList.add("hidden");
       detailsPage.classList.remove("hidden");
@@ -64,7 +49,7 @@ loginBtn.addEventListener("click", () => {
 registerBtn.addEventListener("click", () => {
   const email = registerEmail.value;
   const password = registerPassword.value;
-  auth.createUserWithEmailAndPassword(email, password)
+  createUserWithEmailAndPassword(auth, email, password)
     .then(() => {
       registerPage.classList.add("hidden");
       detailsPage.classList.remove("hidden");
@@ -81,7 +66,7 @@ submitDetailsBtn.addEventListener("click", () => {
 
   const user = auth.currentUser;
   if (user) {
-    db.collection("users").doc(user.uid).set({
+    setDoc(doc(db, "users", user.uid), {
       height,
       weight,
       age,
@@ -152,25 +137,21 @@ function getDietSchedule(bmiCategory) {
       return [
         { day: "Monday", meal: "High-Calorie Breakfast", calories: "500" },
         { day: "Tuesday", meal: "Protein Shake", calories: "400" },
-        // Add more meals
       ];
     case "Normal":
       return [
         { day: "Monday", meal: "Balanced Breakfast", calories: "350" },
         { day: "Tuesday", meal: "Vegetable Salad", calories: "300" },
-        // Add more meals
       ];
     case "Overweight":
       return [
         { day: "Monday", meal: "Low-Calorie Breakfast", calories: "300" },
         { day: "Tuesday", meal: "Grilled Chicken", calories: "400" },
-        // Add more meals
       ];
     case "Obese":
       return [
         { day: "Monday", meal: "Low-Carb Breakfast", calories: "250" },
         { day: "Tuesday", meal: "Boiled Vegetables", calories: "200" },
-        // Add more meals
       ];
     default:
       return [];
@@ -184,25 +165,21 @@ function getWorkoutPlan(bmiCategory) {
       return [
         { day: "Monday", exercise: "Strength Training", duration: "45 mins" },
         { day: "Tuesday", exercise: "Yoga", duration: "30 mins" },
-        // Add more exercises
       ];
     case "Normal":
       return [
         { day: "Monday", exercise: "Cardio", duration: "30 mins" },
         { day: "Tuesday", exercise: "Weight Lifting", duration: "45 mins" },
-        // Add more exercises
       ];
     case "Overweight":
       return [
         { day: "Monday", exercise: "Running", duration: "30 mins" },
         { day: "Tuesday", exercise: "Cycling", duration: "45 mins" },
-        // Add more exercises
       ];
     case "Obese":
       return [
         { day: "Monday", exercise: "Walking", duration: "30 mins" },
         { day: "Tuesday", exercise: "Swimming", duration: "45 mins" },
-        // Add more exercises
       ];
     default:
       return [];
