@@ -1,30 +1,18 @@
-// Firebase Configuration
-// const firebaseConfig = {
-//     apiKey: "AIzaSyDK0PeFgt6_YNqggkIM9MTMSVDYb-a4eHc",
-//     authDomain: "health-is-wealth-6864b.firebaseapp.com",
-//     projectId: "health-is-wealth-6864b",
-//     storageBucket: "health-is-wealth-6864b.appspot.com", // FIXED TYPO
-//     storageBucket: "health-is-wealth-6864b.appspot.com",
-//     messagingSenderId: "701100085079",
-//     appId: "1:701100085079:web:7d8cfbdce0f91553577812",
-//     measurementId: "G-6Y75SX5E8Q"
-// };
-
-// // Initialize Firebase
-// firebase.initializeApp(firebaseConfig);
-// const auth = firebase.auth();
-
 // Register
 function register() {
     const email = document.getElementById("register-email").value;
     const password = document.getElementById("register-password").value;
-    
+
     auth.createUserWithEmailAndPassword(email, password)
-        .then(() => alert("Registration Successful!"))
+        .then((userCredential) => {
+            const user = userCredential.user;
+            alert("Registration Successful!");
+            window.location.href = "dashboard.html";
+        })
         .catch(error => alert(error.message));
 }
 
-// Login
+
 function login() {
     const email = document.getElementById("login-email").value;
     const password = document.getElementById("login-password").value;
@@ -34,12 +22,67 @@ function login() {
         .catch(error => alert(error.message));
 }
 
-// Logout
 function logout() {
     auth.signOut().then(() => window.location.href = "index.html");
 }
 
-// Calculate BMI and Generate Plans
+function saveUserDetails() {
+    const height = document.getElementById("height").value;
+    const weight = document.getElementById("weight").value;
+    const age = document.getElementById("age").value;
+    const city = document.getElementById("city").value;
+
+    if (!height || !weight || !age || !city) {
+        alert("Please fill in all fields.");
+        return;
+    }
+
+    const user = auth.currentUser;
+    if (user) {
+        db.collection('users').doc(user.uid).set({
+            height: parseFloat(height),
+            weight: parseFloat(weight),
+            age: parseInt(age),
+            city: city
+        }).then(() => {
+            alert("User details saved!");
+            checkUserDetails();
+        }).catch(error => {
+            console.error("Error saving user details:", error);
+            alert("Error saving details. Please try again.");
+        });
+    }
+}
+
+function checkUserDetails() {
+    const user = auth.currentUser;
+    if (user) {
+        const userDetailsRef = db.collection('users').doc(user.uid);
+        userDetailsRef.get().then((doc) => {
+            if (doc.exists) {
+                document.getElementById('details-container').style.display = 'none';
+                document.getElementById('dashboard-content').style.display = 'block';
+
+                const data = doc.data();
+                const bmiCategory = calculateBMI(data.height, data.weight);
+
+                const dietPlan = getDietPlan(bmiCategory);
+                populateTable('diet-table', dietPlan);
+
+                const workoutPlan = getWorkoutPlan(bmiCategory);
+                populateTable('workout-table', workoutPlan);
+
+                loadGymMap(data.city);
+            } else {
+                document.getElementById('details-container').style.display = 'block';
+                document.getElementById('dashboard-content').style.display = 'none';
+            }
+        }).catch((error) => {
+            console.error("Error checking user details:", error);
+        });
+    }
+}
+
 function calculateBMI(height, weight) {
     const bmi = weight / ((height / 100) * (height / 100));
     if (bmi < 18.5) return "Underweight";
