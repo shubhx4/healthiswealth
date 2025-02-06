@@ -1,18 +1,18 @@
 // Firebase Configuration
-const firebaseConfig = {
-    apiKey: "AIzaSyDK0PeFgt6_YNqggkIM9MTMSVDYb-a4eHc",
-    authDomain: "health-is-wealth-6864b.firebaseapp.com",
-    projectId: "health-is-wealth-6864b",
-    storageBucket: "health-is-wealth-6864b.appspot.com", // FIXED TYPO
-    storageBucket: "health-is-wealth-6864b.appspot.com",
-    messagingSenderId: "701100085079",
-    appId: "1:701100085079:web:7d8cfbdce0f91553577812",
-    measurementId: "G-6Y75SX5E8Q"
-};
+// const firebaseConfig = {
+//     apiKey: "AIzaSyDK0PeFgt6_YNqggkIM9MTMSVDYb-a4eHc",
+//     authDomain: "health-is-wealth-6864b.firebaseapp.com",
+//     projectId: "health-is-wealth-6864b",
+//     storageBucket: "health-is-wealth-6864b.appspot.com", // FIXED TYPO
+//     storageBucket: "health-is-wealth-6864b.appspot.com",
+//     messagingSenderId: "701100085079",
+//     appId: "1:701100085079:web:7d8cfbdce0f91553577812",
+//     measurementId: "G-6Y75SX5E8Q"
+// };
 
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
-const auth = firebase.auth();
+// // Initialize Firebase
+// firebase.initializeApp(firebaseConfig);
+// const auth = firebase.auth();
 
 // Register
 function register() {
