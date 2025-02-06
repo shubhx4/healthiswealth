@@ -148,6 +148,26 @@ function getWorkoutPlan(bmiCategory) {
                 { day: "Saturday", exercise: "Hiking", duration: "60 mins" },
                 { day: "Sunday", exercise: "Rest Day", duration: "--" }
             ];
+        case "Overweight":
+            return [
+                { day: "Monday", exercise: "Brisk Walking", duration: "30 mins" },
+                { day: "Tuesday", exercise: "Bodyweight Circuit", duration: "30 mins" },
+                { day: "Wednesday", exercise: "Swimming", duration: "30 mins" },
+                { day: "Thursday", exercise: "Yoga (Gentle)", duration: "40 mins" },
+                { day: "Friday", exercise: "Cycling (Moderate)", duration: "30 mins" },
+                { day: "Saturday", exercise: "Active Rest (e.g., Stretching)", duration: "20 mins" },
+                { day: "Sunday", exercise: "Rest Day", duration: "--" }
+            ];
+        case "Obese":
+            return [
+                { day: "Monday", exercise: "Walking (Slow Pace)", duration: "20 mins" },
+                { day: "Tuesday", exercise: "Chair Exercises", duration: "20 mins" },
+                { day: "Wednesday", exercise: "Water Aerobics", duration: "20 mins" },
+                { day: "Thursday", exercise: "Gentle Stretching", duration: "20 mins" },
+                { day: "Friday", exercise: "Walking (Gradually Increase Pace)", duration: "25 mins" },
+                { day: "Saturday", exercise: "Rest or Very Light Activity", duration: "15 mins" },
+                { day: "Sunday", exercise: "Rest Day", duration: "--" }
+            ];
         default:
             return [];
     }
