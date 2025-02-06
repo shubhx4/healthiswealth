@@ -61,6 +61,11 @@ nav {
 
 nav button {
     background: red;
+    width: auto;
+}
+
+nav button:hover {
+    background: red;
 }
 
 /* Dashboard */
