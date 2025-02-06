@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Is Wealth - Dashboard</title>
+    <link rel="stylesheet" href="styles.css">  </head>
+<body>
+    <nav>
+        <div class="logo">Health Is Wealth</div>
+        <button id="logout">Logout</button>
+    </nav>
+
+    <div class="container" id="dashboard-container">
+        <h2>Dashboard</h2>
+        <div id="diet-plan">
+            <h3>Diet Schedule</h3>
+            <table id="diet-table"></table>
+            <button onclick="exportToPDF('diet-plan')">Export as PDF</button>
+        </div>
+        <div id="workout-plan">
+            <h3>Weekly Workout Plan</h3>
+            <table id="workout-table"></table>
+            <button onclick="exportToPDF('workout-plan')">Export as PDF</button>
+        </div>
+        <div id="gyms">
+            <h3>Nearby Gyms</h3>
+            <div id="map" style="height: 300px;"></div>
+        </div>
+        <div id="health-tips">
+            <h3>Healthy Tips</h3>
+            <ul id="tips-list"></ul>
+        </div>
+    </div>
+    <script src="app.js"></script> <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY&libraries=places"></script>
+
+</body>
+</html>
