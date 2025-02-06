@@ -74,6 +74,10 @@ nav button:hover {
     text-align: left;
 }
 
+.pgbg{
+    display: flex;
+}
+
 .card {
     background: white;
     padding: 15px;
