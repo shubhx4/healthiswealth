@@ -1,49 +1,53 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Health Is Wealth - Dashboard</title>
-    <link rel="stylesheet" href="styles.css">  </head>
+    <link rel="stylesheet" href="styles.css">
+</head>
 <body>
     <nav>
         <div class="logo">Health Is Wealth</div>
         <button id="logout">Logout</button>
     </nav>
 
-    <div class="container" id="dashboard-container">
-        <h2>Dashboard</h2>
-        <div class="container" id="details-container">  <h2>Enter Your Details</h2>
-        <input type="number" id="height" placeholder="Height (cm)">
-        <input type="number" id="weight" placeholder="Weight (kg)">
-        <input type="number" id="age" placeholder="Age">
-        <select id="city">
-            <option value="">Select City</option>
-            <option value="Mumbai">Mumbai</option>
+    <div class="container" id="dashboard-container">  <div class="container" id="details-container">  <h2>Enter Your Details</h2>
+            <input type="number" id="height" placeholder="Height (cm)">
+            <input type="number" id="weight" placeholder="Weight (kg)">
+            <input type="number" id="age" placeholder="Age">
+            <select id="city">
+                <option value="">Select City</option>
+                <option value="Mumbai">Mumbai</option>
             </select>
-        <button onclick="saveUserDetails()">Continue</button>
+            <button onclick="saveUserDetails()">Continue</button>
         </div>
-        <div id="diet-plan">
-            <h3>Diet Schedule</h3>
-            <table id="diet-table"></table>
-            <button onclick="exportToPDF('diet-plan')">Export as PDF</button>
-        </div>
-        <div id="workout-plan">
-            <h3>Weekly Workout Plan</h3>
-            <table id="workout-table"></table>
-            <button onclick="exportToPDF('workout-plan')">Export as PDF</button>
-        </div>
-        <div id="gyms">
-            <h3>Nearby Gyms</h3>
-            <div id="map" style="height: 300px;"></div>
-        </div>
-        <div id="health-tips">
-            <h3>Healthy Tips</h3>
-            <ul id="tips-list"></ul>
+
+        <div id="dashboard-content" style="display:none;">  <h2>Dashboard</h2>
+            <div id="diet-plan">
+                <h3>Diet Schedule</h3>
+                <table id="diet-table"></table>
+                <button onclick="exportToPDF('diet-plan')">Export as PDF</button>
+            </div>
+            <div id="workout-plan">
+                <h3>Weekly Workout Plan</h3>
+                <table id="workout-table"></table>
+                <button onclick="exportToPDF('workout-plan')">Export as PDF</button>
+            </div>
+            <div id="gyms">
+                <h3>Nearby Gyms</h3>
+                <div id="map" style="height: 300px;"></div>
+            </div>
+            <div id="health-tips">
+                <h3>Healthy Tips</h3>
+                <ul id="tips-list"></ul>
+            </div>
         </div>
     </div>
+
     <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY&libraries=places"></script>
-<script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore-compat.js"></script>
     <script>
