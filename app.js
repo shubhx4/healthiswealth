@@ -207,7 +207,19 @@ function exportToPDF(sectionId) {
     const element = document.getElementById(sectionId);
     html2pdf().from(element).save("health_plan.pdf");
 }
+function showRegister() {
+    document.getElementById('login-container').style.display = 'none';
+    document.getElementById('register-container').style.display = 'block';
+    document.getElementById('details-container').style.display = 'none'; // Hide details container
+    document.getElementById('dashboard-content').style.display = 'none'; // Hide dashboard content
+}
 
+function showLogin() {
+    document.getElementById('login-container').style.display = 'block';
+    document.getElementById('register-container').style.display = 'none';
+    document.getElementById('details-container').style.display = 'none'; // Hide details container
+    document.getElementById('dashboard-content').style.display = 'none'; // Hide dashboard content
+}
 // Google Maps API Integration
 function loadGymMap(city) {
     const mapFrame = document.getElementById("gym-map");

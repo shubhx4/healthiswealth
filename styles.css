@@ -7,6 +7,14 @@ body {
     color: #333;
 }
 
+.container2 {
+    width: 90%;
+    max-width: 400px;
+    margin-top: auto;
+    margin-bottom: auto;
+    padding: 20px;
+    text-align: center;
+}
 .container {
     width: 90%;
     max-width: 400px;
@@ -74,8 +82,19 @@ nav button:hover {
     text-align: left;
 }
 
-.pgbg{
+.pgbd{
     display: flex;
+    width: 100%;
+    min-height: auto;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    justify-content: center;
+}
+
+.pgsidepic{
+    display: flex;
+    align-items: center;
 }
 
 .card {
