@@ -153,6 +153,35 @@ function getWorkoutPlan(bmiCategory) {
     }
 }
 
+function populateTable(tableId, plan) {
+    const table = document.getElementById(tableId);
+    table.innerHTML = ""; // Clear existing table data
+
+    const headerRow = table.insertRow();
+    if (tableId === "diet-table") {
+        headerRow.insertCell().textContent = "Time";
+        headerRow.insertCell().textContent = "Meal";
+        headerRow.insertCell().textContent = "Calories";
+    } else if (tableId === "workout-table") {
+        headerRow.insertCell().textContent = "Day";
+        headerRow.insertCell().textContent = "Exercise";
+        headerRow.insertCell().textContent = "Duration";
+    }
+
+    plan.forEach(item => {
+        const row = table.insertRow();
+        if (tableId === "diet-table") {
+            row.insertCell().textContent = item.time;
+            row.insertCell().textContent = item.meal;
+            row.insertCell().textContent = item.calories;
+        } else if (tableId === "workout-table") {
+            row.insertCell().textContent = item.day;
+            row.insertCell().textContent = item.exercise;
+            row.insertCell().textContent = item.duration;
+        }
+    });
+}
+
 // Export to PDF
 function exportToPDF(sectionId) {
     const element = document.getElementById(sectionId);
