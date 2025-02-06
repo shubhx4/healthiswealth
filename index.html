@@ -1,60 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Health is Wealth</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fitness App</title>
+  <link rel="stylesheet" href="styles.css">
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-firestore.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+  <script src="script.js"></script>
 </head>
 <body>
-    <div class="container">
-        <h1>Health is Wealth</h1>
-
-        <div id="auth">
-            <h2>Register / Login</h2>
-            <input type="email" id="email" placeholder="Enter Email">
-            <input type="password" id="password" placeholder="Enter Password">
-            <button onclick="register()">Register</button>
-            <button onclick="login()">Login</button>
-        </div>
-
-        <div id="userProfile" class="hidden">
-            <h2>User Profile</h2>
-            <input type="text" id="name" placeholder="Enter Name">
-            <input type="email" id="profileEmail" disabled>
-            <input type="number" id="profileAge" placeholder="Enter Age">
-            <input type="number" id="profileWeight" placeholder="Enter Weight (kg)">
-            <button onclick="updateProfile()">Update Profile</button>
-            <button onclick="logout()">Logout</button>
-        </div>
-
-        <div id="userForm" class="hidden">
-            <h2>Enter Your Details</h2>
-            <input type="number" id="age" placeholder="Enter Age">
-            <input type="number" id="weight" placeholder="Enter Weight (kg)">
-            <button onclick="submitDetails()">Get Health Plan</button>
-        </div>
-
-        <div id="result" class="hidden">
-            <h2>Your Health Report</h2>
-            <table id="dietTable" class="responsive-table"></table>
-        </div>
-
-        <div id="history" class="hidden">
-            <h2>Diet Plan History</h2>
-            <ul id="historyList"></ul>
-        </div>
-
-        <canvas id="weightChart" class="hidden"></canvas>
+  <div id="app">
+    <!-- Login Page -->
+    <div id="login-page" class="page">
+      <h1>Login</h1>
+      <input type="email" id="login-email" placeholder="Email">
+      <input type="password" id="login-password" placeholder="Password">
+      <button id="login-btn">Login</button>
+      <p>Don't have an account? <a href="#" id="go-to-register">Register</a></p>
     </div>
 
-    <!-- Firebase SDK -->
-    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
-    <script src="script.js"></script>
+    <!-- Register Page -->
+    <div id="register-page" class="page hidden">
+      <h1>Register</h1>
+      <input type="email" id="register-email" placeholder="Email">
+      <input type="password" id="register-password" placeholder="Password">
+      <button id="register-btn">Register</button>
+      <p>Already have an account? <a href="#" id="go-to-login">Login</a></p>
+    </div>
+
+    <!-- User Details Page -->
+    <div id="details-page" class="page hidden">
+      <h1>Enter Your Details</h1>
+      <input type="number" id="height" placeholder="Height (cm)">
+      <input type="number" id="weight" placeholder="Weight (kg)">
+      <input type="number" id="age" placeholder="Age">
+      <select id="city">
+        <option value="Mumbai">Mumbai</option>
+        <option value="Delhi">Delhi</option>
+        <option value="Bangalore">Bangalore</option>
+        <option value="Hyderabad">Hyderabad</option>
+        <!-- Add more cities as needed -->
+      </select>
+      <button id="submit-details">Submit</button>
+    </div>
+
+    <!-- Dashboard Page -->
+    <div id="dashboard-page" class="page hidden">
+      <h1>Dashboard</h1>
+      <div id="diet-schedule">
+        <h2>Diet Schedule</h2>
+        <table id="diet-table">
+          <!-- Diet table will be populated here -->
+        </table>
+        <button id="export-diet">Export Diet as PDF</button>
+      </div>
+      <div id="workout-plan">
+        <h2>Workout Plan</h2>
+        <table id="workout-table">
+          <!-- Workout table will be populated here -->
+        </table>
+        <button id="export-workout">Export Workout as PDF</button>
+      </div>
+      <div id="nearby-gyms">
+        <h2>Nearby Gyms</h2>
+        <div id="map"></div>
+      </div>
+      <div id="healthy-tips">
+        <h2>Healthy Tips</h2>
+        <ul id="tips-list">
+          <!-- Tips will be populated here -->
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
