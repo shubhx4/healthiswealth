@@ -1,11 +1,13 @@
 // Firebase Configuration
 const firebaseConfig = {
-    apiKey: "YOUR_API_KEY",
-    authDomain: "YOUR_AUTH_DOMAIN",
-    projectId: "YOUR_PROJECT_ID",
-    storageBucket: "YOUR_STORAGE_BUCKET",
-    messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-    appId: "YOUR_APP_ID"
+    apiKey: "AIzaSyDK0PeFgt6_YNqggkIM9MTMSVDYb-a4eHc",
+    authDomain: "health-is-wealth-6864b.firebaseapp.com",
+    projectId: "health-is-wealth-6864b",
+    storageBucket: "health-is-wealth-6864b.appspot.com", // FIXED TYPO
+    storageBucket: "health-is-wealth-6864b.appspot.com",
+    messagingSenderId: "701100085079",
+    appId: "1:701100085079:web:7d8cfbdce0f91553577812",
+    measurementId: "G-6Y75SX5E8Q"
 };
 
 // Initialize Firebase
