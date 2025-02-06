@@ -13,6 +13,16 @@
 
     <div class="container" id="dashboard-container">
         <h2>Dashboard</h2>
+        <div class="container" id="details-container">  <h2>Enter Your Details</h2>
+        <input type="number" id="height" placeholder="Height (cm)">
+        <input type="number" id="weight" placeholder="Weight (kg)">
+        <input type="number" id="age" placeholder="Age">
+        <select id="city">
+            <option value="">Select City</option>
+            <option value="Mumbai">Mumbai</option>
+            </select>
+        <button onclick="saveUserDetails()">Continue</button>
+        </div>
         <div id="diet-plan">
             <h3>Diet Schedule</h3>
             <table id="diet-table"></table>
@@ -32,7 +42,33 @@
             <ul id="tips-list"></ul>
         </div>
     </div>
-    <script src="app.js"></script> <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY&libraries=places"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY&libraries=places"></script>
+<script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore-compat.js"></script>
+    <script>
+  // Your web app's Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyDK0PeFgt6_YNqggkIM9MTMSVDYb-a4eHc",
+    authDomain: "health-is-wealth-6864b.firebaseapp.com",
+    projectId: "health-is-wealth-6864b",
+    storageBucket: "health-is-wealth-6864b.appspot.com", // FIXED TYPO
+    storageBucket: "health-is-wealth-6864b.appspot.com",
+    messagingSenderId: "701100085079",
+    appId: "1:701100085079:web:7d8cfbdce0f91553577812",
+    measurementId: "G-6Y75SX5E8Q"
+};
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
 
+  // Get the auth instance
+  const auth = firebase.auth();
+
+  // Get the firestore instance
+  const db = firebase.firestore();
+
+  // ... your code
+</script>
+    <script src="app.js"></script>
 </body>
 </html>
