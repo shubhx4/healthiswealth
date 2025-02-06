@@ -80,5 +80,36 @@
   </div>
 
   <script src="script.js"></script>
+  <!-- Firebase SDK -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-app.js";
+  import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-auth.js";
+  import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-firestore.js";
+
+  // Your Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyDK0PeFgt6_YNqggkIM9MTMSVDYb-a4eHc",
+    authDomain: "health-is-wealth-6864b.firebaseapp.com",
+    projectId: "health-is-wealth-6864b",
+    storageBucket: "health-is-wealth-6864b.appspot.com", // FIXED TYPO
+    storageBucket: "health-is-wealth-6864b.appspot.com",
+    messagingSenderId: "701100085079",
+    appId: "1:701100085079:web:7d8cfbdce0f91553577812",
+    measurementId: "G-6Y75SX5E8Q"
+}; 
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+
+  // Make Firebase variables globally accessible
+  window.auth = auth;
+  window.db = db;
+  window.signInWithEmailAndPassword = signInWithEmailAndPassword;
+  window.createUserWithEmailAndPassword = createUserWithEmailAndPassword;
+  window.doc = doc;
+  window.setDoc = setDoc;
+</script>
 </body>
 </html>
