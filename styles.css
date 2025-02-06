@@ -51,7 +51,7 @@ button:hover {
 }
 
 /* Navigation Bar */
-.nav {
+nav {
     display: flex;
     justify-content: space-between;
     padding: 15px;
@@ -59,7 +59,7 @@ button:hover {
     color: white;
 }
 
-.nav button {
+nav button {
     background: red;
 }
 
